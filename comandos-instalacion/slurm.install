@@ -1,0 +1,22 @@
+wget https://download.schedmd.com/slurm/slurm-20.02.4.tar.bz2;
+tar -xvf slurm-20.02.4.tar.bz2;
+mungedir=/SHARED/munge-install;
+slurmdir=/SHARED/slurm-install;
+configdir=$slurmdir/confdir;
+mkdir -p $configdir;
+mkdir $slurmdir/var;
+cd slurm-20.02.4;
+./configure --prefix=$slurmdir --sysconfdir=$configdir --with-munge=$mungedir --enable-deprecated;
+make -j4;
+make install;
+cd;
+echo 'export PATH=/SHARED/slurm-install/bin:/SHARED/slurm-install/sbin:$PATH' >> .bashrc;
+cp slurm.conf $configdir;
+sudo cp slurmctld.service /usr/lib/systemd/user;
+cp slurmd.service /SHARED/slurm-install;
+./ejecutar_en_nodos_computo.sh sudo cp /SHARED/slurm-install/slurmd.service /usr/lib/systemd/user/;
+systemctl --user daemon-reload;
+./ejecutar_en_nodos_computo.sh systemctl --user daemon-reload;
+./ejecutar_en_nodos_computo.sh systemctl --user start slurmd;
+systemctl --user start slurmctld;
+

@@ -1,0 +1,15 @@
+[Unit]
+Description=MUNGE authentication service
+Documentation=man:munged(8)
+After=network.target
+After=time-sync.target
+
+[Service]
+Type=forking
+EnvironmentFile=-/SHARED/munge-install/etc/default/munge
+ExecStart=/SHARED/munge-install/sbin/munged $OPTIONS
+PIDFile=/home/pi/munge-files/run/munge/munged.pid
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Slurm controller daemon
+After=network.target munge.service
+ConditionPathExists=/SHARED/slurm-install/confdir/slurm.conf
+
+[Service]
+Type=forking
+EnvironmentFile=-/SHARED/slurm-install/confdir/slurmctld
+ExecStart=/SHARED/slurm-install/sbin/slurmctld $SLURMCTLD_OPTIONS
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/SHARED/slurm-install/var/slurmctld.pid
+LimitNOFILE=65536
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target

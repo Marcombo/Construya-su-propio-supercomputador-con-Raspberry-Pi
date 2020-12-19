@@ -1,0 +1,19 @@
+Description=Slurm node daemon
+After=munge.service network.target remote-fs.target
+ConditionPathExists=/SHARED/slurm-install/confdir/slurm.conf
+
+[Service]
+Type=forking
+EnvironmentFile=-/SHARED/slurm-install/confdir/slurmd
+ExecStart=/SHARED/slurm-install/sbin/slurmd $SLURMD_OPTIONS
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/SHARED/slurm-install/var/slurmd.%H.pid
+KillMode=process
+LimitNOFILE=131072
+LimitMEMLOCK=infinity
+LimitSTACK=infinity
+Delegate=yes
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
