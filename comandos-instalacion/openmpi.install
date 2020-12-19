@@ -1,0 +1,9 @@
+wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.2.tar.gz;
+tar -xvf openmpi-4.0.2.tar.gz;
+cd openmpi-4.0.2;
+./configure --prefix=/SHARED/openmpi-4.0.2-install --enable-mpirun-prefix-by-default;
+make -j4;
+make install;
+cd;
+echo 'export PATH=/SHARED/openmpi-4.0.2-install/bin:$PATH' >> .bashrc;
+source .bashrc;

@@ -1,0 +1,9 @@
+wget http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz;
+tar -xvf mpich-3.3.2.tar.gz;
+cd mpich-3.3.2;
+./configure --prefix=/SHARED/mpich-3.3.2-install --disable-f77 --disable-fc  --disable-fortran;
+make -j4;
+make install;
+cd;
+echo 'export PATH=/SHARED/mpich-3.3.2-install/bin:$PATH' >> .bashrc;
+source .bashrc;
