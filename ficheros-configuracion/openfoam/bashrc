@@ -1,0 +1,170 @@
+#----------------------------------*-sh-*--------------------------------------
+# =========                 |
+# \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+#  \\    /   O peration     |
+#   \\  /    A nd           | www.openfoam.com
+#    \\/     M anipulation  |
+#------------------------------------------------------------------------------
+#     Copyright (C) 2011-2016 OpenFOAM Foundation
+#     Copyright (C) 2016-2019 OpenCFD Ltd.
+#------------------------------------------------------------------------------
+# License
+#     This file is part of OpenFOAM, licensed under GNU General Public License
+#     <http://www.gnu.org/licenses/>.
+#
+# File
+#     etc/bashrc
+#
+# Description
+#     The OpenFOAM environment for POSIX shell (eg, bash,dash,zsh,...).
+#     Source manually or from the ~/.bashrc or ~/.profile files.
+#
+#     Most settings can be overridden with a <prefs.sh> file:
+#
+#       - Base values (eg, from system admin):
+#         -  $WM_PROJECT_DIR/etc/prefs.sh
+#
+#       - User or group values (first file found):
+#         -  ~/.OpenFOAM/$FOAM_API/prefs.sh
+#         -  ~/.OpenFOAM/prefs.sh
+#         -  $WM_PROJECT_SITE/$FOAM_API/etc/prefs.sh
+#         -  $WM_PROJECT_SITE/etc/prefs.sh
+#
+# Environment
+#     FOAM_VERBOSE (set/unset)
+#         - add extra verbosity when sourcing files
+#     FOAM_CONFIG_NOUSER (set/unset)
+#         - suppress use of user/group configuration files
+#     WM_PROJECT_SITE (optional directory)
+#         - local site-specific directory, uses WM_PROJECT_DIR/site if unset
+#
+# Note
+#     Changes made to this file will be lost with the next upgrade.
+#
+#------------------------------------------------------------------------------
+
+# [WM_PROJECT_VERSION] - A human-readable version name
+# A development version is often named 'com' - as in www.openfoam.com
+export WM_PROJECT_VERSION=v1912
+
+#------------------------------------------------------------------------------
+# Configuration environment variables.
+# Override with <prefs.sh> instead of editing here.
+
+# [WM_COMPILER_TYPE] - Compiler location:
+# = system | ThirdParty
+export WM_COMPILER_TYPE=system
+
+# [WM_COMPILER] - Compiler:
+# = Gcc | Gcc4[8-9] | Gcc5[1-5] | Gcc6[1-5] | Gcc7[1-4] | Gcc8[12] |
+#   Clang | Clang3[7-9] | Clang[4-6]0 | Icc | Cray | Arm | Pgi
+export WM_COMPILER=Gcc
+
+# [WM_PRECISION_OPTION] - Floating-point precision:
+# = DP | SP | SPDP
+export WM_PRECISION_OPTION=DP
+
+# [WM_LABEL_SIZE] - Label size in bits:
+# = 32 | 64
+export WM_LABEL_SIZE=32
+
+# [WM_COMPILE_OPTION] - Optimised(default), debug, profiling, other:
+# = Opt | Debug | Prof
+# Other is processor or packaging specific (eg, OptKNL)
+export WM_COMPILE_OPTION=Opt
+
+# [WM_MPLIB] - MPI implementation:
+# = SYSTEMOPENMPI | OPENMPI | SYSTEMMPI | MPI | MPICH | MPICH-GM |
+#   HPMPI | CRAY-MPICH | FJMPI | QSMPI | SGIMPI | INTELMPI | USERMPI
+# Also possible to use INTELMPI-xyz etc and define your own wmake rule
+export WM_MPLIB=SYSTEMMPI
+
+
+#------------------------------------------------------------------------------
+# (advanced / legacy)
+
+# [WM_PROJECT] - This project is "OpenFOAM" - do not change
+export WM_PROJECT=OpenFOAM
+
+# [projectDir] - directory containing this OpenFOAM version.
+# \- When this file is located as $WM_PROJECT_DIR/etc/bashrc, the next lines
+#    should work when sourced by BASH or ZSH shells. If this however fails,
+#    set one of the fallback values to an appropriate path.
+#
+#    This can be removed if an absolute path is provided for WM_PROJECT_DIR
+#    later on in this file
+# --
+projectDir="${BASH_SOURCE:-${ZSH_NAME:+$0}}";
+[ -n "$projectDir" ] && projectDir="$(\cd $(dirname $projectDir)/.. && \pwd -L)" ||\
+projectDir="$HOME/OpenFOAM/OpenFOAM-$WM_PROJECT_VERSION"
+# projectDir="/opt/openfoam/OpenFOAM-$WM_PROJECT_VERSION"
+# projectDir="/usr/local/OpenFOAM/OpenFOAM-$WM_PROJECT_VERSION"
+################################################################################
+# Or optionally hard-coded (eg, with autoconfig)
+# projectDir="@PROJECT_DIR@"
+: # Safety statement (if the user removed all fallback values)
+
+# [FOAM_SIGFPE] - Trap floating-point exceptions.
+#               - overrides the 'trapFpe' controlDict entry
+# = true | false
+#export FOAM_SIGFPE=true
+
+# [FOAM_SETNAN] - Initialize memory with NaN
+#               - overrides the 'setNaN' controlDict entry
+# = true | false
+#export FOAM_SETNAN=false
+
+# [FOAM_CODE_TEMPLATES] - dynamicCode templates
+# - unset: uses 'foamEtcFile -list codeTemplates/dynamicCode'
+##export FOAM_CODE_TEMPLATES="$WM_PROJECT_DIR/etc/codeTemplates/dynamicCode"
+
+# [FOAM_JOB_DIR] - location of jobControl
+#                - unset: equivalent to ~/.OpenFOAM/jobControl
+# export FOAM_JOB_DIR="$HOME/.OpenFOAM/jobControl"
+
+# [WM_OSTYPE] - Operating System Type (set automatically)
+# = POSIX | MSwindows
+#export WM_OSTYPE=POSIX
+
+# [WM_ARCH_OPTION] - compiling with -m32 option on 64-bit system
+# = 32 | 64
+#   * on a 64-bit OS this can be 32 or 64
+#   * on a 32-bit OS this option is ignored (always 32-bit)
+#export WM_ARCH_OPTION=64
+
+################################################################################
+# NO (NORMAL) USER EDITING BELOW HERE
+
+# Capture values of old directories to be cleaned from PATH, LD_LIBRARY_PATH
+foamOldDirs="$WM_PROJECT_DIR $WM_THIRD_PARTY_DIR \
+    $HOME/$WM_PROJECT/$USER $FOAM_USER_APPBIN $FOAM_USER_LIBBIN \
+    $WM_PROJECT_SITE $FOAM_SITE_APPBIN $FOAM_SITE_LIBBIN"
+
+# [WM_PROJECT_DIR] - Location of this OpenFOAM version
+export WM_PROJECT_DIR="$projectDir"
+
+# [WM_PROJECT_USER_DIR] - Location of user files
+export WM_PROJECT_USER_DIR="$HOME/$WM_PROJECT/$USER-$WM_PROJECT_VERSION"
+
+# [WM_PROJECT_SITE] - Location of site-specific (group) files
+# Default (unset) implies WM_PROJECT_DIR/site
+# Normally defined in calling environment
+
+
+# Finalize setup of OpenFOAM environment
+if [ -d "$WM_PROJECT_DIR" ]
+then
+    if [ -n "$FOAM_VERBOSE" ] && [ -n "$PS1" ]
+    then
+        echo "source $WM_PROJECT_DIR/etc/config.sh/setup" 1>&2
+    fi
+    . "$WM_PROJECT_DIR/etc/config.sh/setup" "$@"
+else
+    echo "Error: did not locate installation path for $WM_PROJECT-$WM_PROJECT_VERSION" 1>&2
+    echo "No directory: $WM_PROJECT_DIR" 1>&2
+fi
+
+# Cleanup variables (done as final statement for a clean exit code)
+unset foamOldDirs projectDir
+
+#------------------------------------------------------------------------------
