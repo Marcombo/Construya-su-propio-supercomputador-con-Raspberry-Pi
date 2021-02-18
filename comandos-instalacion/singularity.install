@@ -1,0 +1,36 @@
+# Instalacion pre-requisitos y definicion de variables
+sudo apt-get update
+sudo apt-get install -y build-essential libssl-dev uuid-dev libgpgme11-dev squashfs-tools libseccomp-dev wget pkg-config git 
+
+export SHARED_DIR=/SHARED
+export SINGULARITY_LOCAL_DIR=/opt/singularity_local
+echo 'export SHARED_DIR=/SHARED' >> .bashrc
+echo 'export SINGULARITY_LOCAL_DIR=/opt/singularity_local' >> .bashrc
+
+# Descargar e instalar GO
+source .bashrc
+export VERSION=1.14.12 OS=linux ARCH=armv6l
+wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz
+tar -C $SHARED_DIR/ -xzvf go$VERSION.$OS-$ARCH.tar.gz
+rm go$VERSION.$OS-$ARCH.tar.gz
+echo 'export GOPATH=$SHARED_DIR/go' >> .bashrc
+echo 'export PATH=$SHARED_DIR/go:$PATH:$GOPATH/bin' >> .bashrc
+source .bashrc
+
+# Comprobar que Go esta instalado correctamente
+go version
+
+# Descargar e instalar singularity
+#SINGULARITY_LOCAL_DIR=/tmp/singularity353
+export VERSION=3.5.3
+wget https://github.com/sylabs/singularity/releases/download/v$VERSION/singularity-$VERSION.tar.gz
+tar -xzf singularity-$VERSION.tar.gz
+rm singularity-$VERSION.tar.gz
+cd singularity
+./mconfig --prefix=$SHARED_DIR/singularity/ --localstatedir=$SINGULARITY_LOCAL_DIR
+make -C ./builddir
+sudo make -C ./builddir install
+echo 'export PATH=$SHARED_DIR/singularity/bin:$PATH' >> .bashrc
+
+# Comprobar que Singularity esta instalado correctamente
+singularity version

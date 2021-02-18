@@ -1,0 +1,44 @@
+Bootstrap: library
+From: serlophug/ubuntu18/mpich:3.3
+
+%labels
+    author Sergio López-Huguet
+    email serlohu@upv.es
+    created 30/11/2020
+
+%post
+    export MPICH_DIR=/opt/mpich
+    export LAMMPS_DIR=/opt
+    export PATH=$MPICH_DIR/bin:$PATH
+    export LD_LIBRARY_PATH=$MPICH_DIR/lib:$LD_LIBRARY_PATH
+    export MANPATH=$MPICH_DIR/share/man:$MANPATH
+    export LAMMPS_PACKAGE_NAME=stable_29Oct2020
+
+    apt-get  update
+    apt-get -y install wget bash gcc gfortran g++ make file unzip
+
+    cd ${LAMMPS_DIR}
+    wget https://github.com/lammps/lammps/archive/${LAMMPS_PACKAGE_NAME}.zip
+    unzip ${LAMMPS_PACKAGE_NAME}.zip
+    rm ${LAMMPS_PACKAGE_NAME}.zip
+
+    cd ${LAMMPS_DIR}/lammps-${LAMMPS_PACKAGE_NAME}/src
+    make mpi
+
+%environment
+    export MPICH_DIR=/opt/mpich
+    export SINGULARITY_MPICH_DIR=$MPICH_DIR
+    export SINGULARITYENV_APPEND_PATH=$MPICH_DIR/bin
+    export SINGULAIRTYENV_APPEND_LD_LIBRARY_PATH=$MPICH_DIR/lib
+
+%test
+    export MPICH_DIR=/opt/mpich
+    export SINGULARITY_MPICH_DIR=$MPICH_DIR
+    export PATH=$MPICH_DIR/bin
+    export LD_LIBRARY_PATH=$MPICH_DIR/lib:LD_LIBRARY_PATH
+
+    LAMMPS_DIR=/opt
+    LAMMPS_PACKAGE_NAME=stable_29Oct2020
+    SIZE=3
+
+    ${LAMMPS_DIR}/lammps-${LAMMPS_PACKAGE_NAME}/src/lmp_mpi -var x ${SIZE} -var y ${SIZE} -var z ${SIZE} -in ${LAMMPS_DIR}/lammps-${LAMMPS_PACKAGE_NAME}/bench/in.lj

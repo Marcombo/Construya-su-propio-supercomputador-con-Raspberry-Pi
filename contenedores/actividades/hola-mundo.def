@@ -1,0 +1,18 @@
+Bootstrap: localimage
+From: /SHARED/SingularityImages/mpich/mpich.sif
+
+%files
+    hola_mundo_mpi.c /opt
+
+%post
+    # Set env variables so we can compile our application
+    export MPICH_DIR=/opt/mpich
+    export PATH=$MPICH_DIR/bin:$PATH
+    export LD_LIBRARY_PATH=$MPICH_DIR/lib:$LD_LIBRARY_PATH
+    export MANPATH=$MPICH_DIR/share/man:$MANPATH
+
+    # Compiling the application
+    cd /opt && mpicc -o hola_mundo_mpi hola_mundo_mpi.c
+
+%runscript
+    /opt/hola_mundo_mpi
