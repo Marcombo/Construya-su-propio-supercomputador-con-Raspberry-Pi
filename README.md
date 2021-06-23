@@ -1,6 +1,6 @@
 # Construya su Propio Supercomputador con Raspberry Pi
 
-<img src="C:\Users\Sandra\Documents\PortadaLibro.PNG" alt="portada" style="zoom:25%;" />
+![portada](https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQk_-E3TYWqT7BH4vzRbBMqS0hPRXhDL4Lrm6pQBam_TulqjjVMK7Y&usqp=CAc)
 
 ## Resumen
 
