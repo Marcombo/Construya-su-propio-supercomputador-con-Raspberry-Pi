@@ -1,4 +1,7 @@
-wget https://download.schedmd.com/slurm/slurm-20.02.4.tar.bz2;
+##################################################################
+# wget https://download.schedmd.com/slurm/slurm-20.02.4.tar.bz2;
+##################################################################
+wget https://github.com/Marcombo/Construya-su-propio-supercomputador-con-Raspberry-Pi/raw/main/software/slurm-20.02.4.tar.bz2
 tar -xvf slurm-20.02.4.tar.bz2;
 mungedir=/SHARED/munge-install;
 slurmdir=/SHARED/slurm-install;
