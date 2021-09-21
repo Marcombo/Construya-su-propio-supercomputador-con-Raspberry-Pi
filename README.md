@@ -1,6 +1,12 @@
 # Construya su Propio Supercomputador con Raspberry Pi
 
-![portada](https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQk_-E3TYWqT7BH4vzRbBMqS0hPRXhDL4Lrm6pQBam_TulqjjVMK7Y&usqp=CAc)
+<!---
+![portada](https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQk_-E3TYWqT7BH4vzRbBMqS0hPRXhDL4Lrm6pQBam_TulqjjVMK7Y&usqp=CAc) 
+-->
+
+<p align="center">
+  <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQk_-E3TYWqT7BH4vzRbBMqS0hPRXhDL4Lrm6pQBam_TulqjjVMK7Y&usqp=CAc" />
+</p>
 
 ## Resumen
 
@@ -37,5 +43,5 @@ Este repositorio contiene materiales de apoyo para varios capítulos del libro. 
   - Ficheros de configuración: HPL, Lammps, OpenFoam
 - Capítulo 8
   - Comandos de instalación: Singularity
-  - Códigos fuente: hpl 2.3, iperf 3.1.3 y stress-ng 0.12.00
-  - Códigos de ejemplo: hola_mundo.c (con y sin MPI), lolcow.def, ompi.def
+  - Códigos fuente: Go v1.14.12
+  - Códigos de ejemplo: hola_mundo_mpi.c (con MPI), hola-mundo.def, lolcow.def, ompi.def
