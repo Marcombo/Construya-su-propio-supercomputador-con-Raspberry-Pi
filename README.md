@@ -45,3 +45,17 @@ Este repositorio contiene materiales de apoyo para varios capítulos del libro. 
   - Comandos de instalación: Singularity
   - Códigos fuente: Go v1.14.12
   - Códigos de ejemplo: hola_mundo_mpi.c (con MPI), hola-mundo.def, lolcow.def, ompi.def
+
+¿Cómo citarlo?
+
+Iserte, S., Catalán, S., Carratalá, R., López, S. (2021). Construya su propio supercomputador con Raspberry Pi : un manual sencillo para iniciarse en la supercomputación desde el entretenimiento. Marcombo. https://www.marcombo.com/construya-su-propio-supercomputador-con-raspberry-pi-9788426732811
+
+@book{RPI2021,
+   author = {Sergio Iserte and Sandra Catalán and Rocío Carratalá and Sergio López},
+   city = {Barcelona},
+   isbn = {9788426732811},
+   publisher = {Marcombo},
+   title = {Construya su propio supercomputador con Raspberry Pi : un manual sencillo para iniciarse en la supercomputación desde el entretenimiento},
+   url = {https://www.marcombo.com/construya-su-propio-supercomputador-con-raspberry-pi-9788426732811/},
+   year = {2021},
+}
