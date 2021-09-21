@@ -46,7 +46,7 @@ Este repositorio contiene materiales de apoyo para varios capítulos del libro. 
   - Códigos fuente: Go v1.14.12
   - Códigos de ejemplo: hola_mundo_mpi.c (con MPI), hola-mundo.def, lolcow.def, ompi.def
 
-¿Cómo citarlo?
+## ¿Cómo citar este libro?
 
 Iserte, S., Catalán, S., Carratalá, R., López, S. (2021). Construya su propio supercomputador con Raspberry Pi : un manual sencillo para iniciarse en la supercomputación desde el entretenimiento. Marcombo. https://www.marcombo.com/construya-su-propio-supercomputador-con-raspberry-pi-9788426732811
 
