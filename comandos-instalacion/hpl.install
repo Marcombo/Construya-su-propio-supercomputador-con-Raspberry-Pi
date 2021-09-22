@@ -11,8 +11,9 @@ tar -xzvf hpl-2.3.tar.gz;
 mv hpl-2.3 /SHARED/hpl;
 cd /SHARED/hpl/setup;
 sh make_generic;
-cp $HOME/Make.rpi /SHARED/hpl/Make.rpi;
 cd ..;
+cp /SHARED/hpl/setup/Make.UNKNOWN /SHARED/hpl/Make.rpi;
+#### Edit Make.rpi file
 make -j4 arch=rpi;
 cd;
 echo 'export PATH=/SHARED/mpich-3.3.2-fort/bin:$PATH' >> .bashrc;
