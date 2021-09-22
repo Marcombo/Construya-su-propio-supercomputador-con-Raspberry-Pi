@@ -83,7 +83,7 @@ HPLlib       = $(LIBdir)/libhpl.a
 #
 MPdir        = /SHARED/mpich-3.3.2-fort
 MPinc        = -I $(MPdir)/include
-MPlib        = -L$(MPdir)/lib/libmpich.a 
+MPlib        = -L$(MPdir)/lib/ -lmpich 
 #
 # ----------------------------------------------------------------------
 # - Linear Algebra library (BLAS or VSIPL) -----------------------------
