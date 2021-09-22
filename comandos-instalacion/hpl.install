@@ -13,9 +13,8 @@ cd /SHARED/hpl/setup;
 sh make_generic;
 cd ..;
 cp /SHARED/hpl/setup/Make.UNKNOWN /SHARED/hpl/Make.rpi;
-#### Edit Make.rpi file
+#### Edit /SHARED/hpl/Make.rpi file
 make -j4 arch=rpi;
-cd;
+#### Edit /SHARED/hpl/bin/rpi/HPL.dat
 echo 'export PATH=/SHARED/mpich-3.3.2-fort/bin:$PATH' >> .bashrc;
 echo 'export LD_LIBRARY_PATH=/SHARED/mpich-3.3.2-fort/lib:$LD_LIBRARY_PATH' >> .bashrc;
-cp HPL.dat /SHARED/hpl/bin/rpi;
