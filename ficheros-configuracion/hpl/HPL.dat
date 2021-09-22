@@ -3,22 +3,22 @@ Innovative Computing Laboratory, University of Tennessee
 HPL.out      output file name (if any)
 6            device out (6=stdout,7=stderr,file)
 1            # of problems sizes (N)
-19840		 Ns
+24320   		 Ns
 1            # of NBs
-128		     NBs
+128		       NBs
 0            PMAP process mapping (0=Row-,1=Column-major)
 1            # of process grids (P x Q)
-2		     Ps
-4	         Qs
+3		         Ps
+4	           Qs
 16.0         threshold
 1            # of panel fact
-2	         PFACTs (0=left, 1=Crout, 2=Right)
+2	           PFACTs (0=left, 1=Crout, 2=Right)
 1            # of recursive stopping criterium
-4	         NBMINs (>= 1)
+4	           NBMINs (>= 1)
 1            # of panels in recursion
 2            NDIVs
 1            # of recursive panel fact.
-1	         RFACTs (0=left, 1=Crout, 2=Right)
+1	           RFACTs (0=left, 1=Crout, 2=Right)
 1            # of broadcast
 1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)
 1            # of lookahead depth
